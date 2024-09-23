@@ -12,6 +12,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "build-widget": "npm run build && move build\\static\\js\\main.*.js build\\chat-widget.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

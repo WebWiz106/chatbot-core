@@ -1,0 +1,42 @@
+/* src/ChatWidget.css */
+
+.chat-box {
+    background-color: white;
+    border: 1px solid #ccc;
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+  }
+  
+  .chat-message {
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+  
+  .chat-message.user {
+    background-color: #3498db;
+    color: white;
+    text-align: right;
+  }
+  
+  .chat-message.bot {
+    background-color: #ecf0f1;
+    color: black;
+    text-align: left;
+  }
+  
+  .chat-toggle-btn {
+    padding: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
