@@ -1,12 +1,17 @@
-// src/ChatWidget.js
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ChatWidget.css'; // Optional CSS file for styling
+import { TbMessageChatbot } from "react-icons/tb";
+import { TbSend } from "react-icons/tb";
 
 const ChatWidget = ({ position = 'bottom-right', themeColor = '#3498db' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
+
+  // Effect to set the initial bot message
+  useEffect(() => {
+    setMessages([{ text: "How can I assist you?", sender: 'bot' }]);
+  }, []);
 
   const toggleChat = () => setIsOpen(!isOpen);
 
@@ -16,7 +21,7 @@ const ChatWidget = ({ position = 'bottom-right', themeColor = '#3498db' }) => {
     setMessages([...messages, { text: message, sender: 'user' }]);
     setInputValue("");
 
-    // Mock bot response, in real application, make API call here
+    // Mock bot response
     setTimeout(() => {
       setMessages((prevMessages) => [
         ...prevMessages,
@@ -28,7 +33,7 @@ const ChatWidget = ({ position = 'bottom-right', themeColor = '#3498db' }) => {
   return (
     <div className="chat-widget" style={{ position: 'fixed', [position]: '20px' }}>
       <button className="chat-toggle-btn" onClick={toggleChat} style={{ backgroundColor: themeColor }}>
-        {isOpen ? 'Close Chat' : 'Open Chat'}
+        <TbMessageChatbot style={{ fontSize: '2em', transition: 'transform 0.3s' }} />
       </button>
       {isOpen && (
         <div className="chat-box">
@@ -39,15 +44,23 @@ const ChatWidget = ({ position = 'bottom-right', themeColor = '#3498db' }) => {
               </div>
             ))}
           </div>
-          <input
-            type="text"
-            placeholder="Type a message..."
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') sendMessage(inputValue);
-            }}
-          />
+          <div className="chat-input-container">
+            <input
+              type="text"
+              placeholder="Type a message..."
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') sendMessage(inputValue);
+              }}
+            />
+            <button
+              className="send-btn"
+              onClick={() => sendMessage(inputValue)}
+            >
+              <TbSend />
+            </button>
+          </div>
         </div>
       )}
     </div>
